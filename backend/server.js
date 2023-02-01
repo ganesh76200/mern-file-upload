@@ -1,0 +1,13 @@
+const express  = require("express")
+const cors = require("cors")
+const { connect } = require("./config/db")
+require("dotenv").config({path: ".env"})
+connect()
+const app = express()
+app.use(express.json())
+app.use(cors())
+app.use(express.static("public"))
+app.use("/user" , require("./routes/userRoute"))
+app.use("/doc" , require("./routes/docRoutes"))
+console.log(process.env.MONGO_URL);
+app.listen(process.env.PORT, console.log("http://locahost:5000"))
